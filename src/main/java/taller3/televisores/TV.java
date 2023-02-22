@@ -8,7 +8,7 @@ public class TV {
     private int volumen;
     private Control control;
 
-    private static int numTV ;
+    private static int numTV;
 
     public TV(Marca marca, boolean estado) {
         this.marca = marca;
@@ -16,6 +16,7 @@ public class TV {
         this.canal = 1;
         this.volumen = 1;
         this.precio = 500;
+        TV.numTV++;
     }
 
     public Marca getMarca() {
@@ -31,7 +32,8 @@ public class TV {
     }
 
     public void setCanal(int canal) {
-        this.canal = canal;
+        if (canal<121 && canal>1)
+            this.canal = canal;
     }
 
     public int getPrecio() {
@@ -62,12 +64,12 @@ public class TV {
         return numTV;
     }
 
-    public boolean turnOn() {
-        return estado = true;
+    public void turnOn() {
+        estado = true;
     }
 
-    public boolean turnOff() {
-        return estado = false;
+    public void turnOff() {
+        estado = false;
     }
 
     public boolean getEstado() {
@@ -96,26 +98,5 @@ public class TV {
 
     public static void setNumTV(int numTV) {
         TV.numTV = numTV;
-    }
-
-    public static void main(String[] args) {
-        Marca marca =  new Marca("Semsung");
-        TV tv1 =  new TV(marca, true);
-
-        tv1.setCanal(100);
-        tv1.canalDown();
-
-        TV tv2 =  new TV(marca, false);
-        Control control =  new Control();
-        control.enlazar(tv2);
-        control.setCanal(50);
-        control.turnOn();
-        control.canalUp();
-
-        TV tv3 =  new TV(marca, false);
-        tv2.setCanal(121);
-        System.out.println(tv1.getCanal());
-        System.out.println(tv2.getCanal());
-        System.out.println(tv3.getCanal());
     }
 }
